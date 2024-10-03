@@ -2,6 +2,7 @@ const express = require('express');
 const cors = require('cors');
 const fs = require('fs');
 const app = express();
+const PORT = process.env.PORT || 3000;
 
 
 app.use(cors({
@@ -20,6 +21,6 @@ app.get('/data', (req, res) => {
     });
 });
 
-app.listen(3001, () => {
-    console.log('서버가 3001번 포트에서 실행 중입니다.');
+app.listen(PORT, () => {
+    console.log(`서버가 ${PORT}번 포트에서 실행 중입니다.`);
 });
