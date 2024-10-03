@@ -6,10 +6,10 @@ const PORT = process.env.PORT || 3000;
 
 
 app.use(cors({
-    origin: 'https://rebuild-kc.com',  // 모든 출처를 허용하거나 특정 출처만 허용할 수 있습니다.
-    methods: 'GET',
-    allowedHeaders : 'Content-Type'
-  }));
+    origin: 'https://rebuild-kc.com',  // 이 도메인만 허용
+    methods: 'GET',  // GET 요청만 허용
+    allowedHeaders: 'Content-Type'  // 허용된 헤더
+}));
 
 // form_data.json 파일을 클라이언트에게 제공
 app.get('/data', (req, res) => {
