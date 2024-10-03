@@ -3,9 +3,6 @@ const cors = require('cors');
 const fs = require('fs');
 const app = express();
 
-app.listen(4000, () => {
-    console.log(`서버가 4000번 포트에서 실행 중입니다.`);
-});
 
 app.use(cors({
     origin: '*',  // 모든 출처를 허용하거나 특정 출처만 허용할 수 있습니다.
