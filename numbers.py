@@ -49,6 +49,7 @@ def fetch_form_data():
 
         # 폼 데이터 추출
         data = []
+        new_data_added = False # 새로운 데이터가 추가되었는지 여부를 추적
         entries = driver.find_elements(By.CSS_SELECTOR, 'ul._tbody.content')  # 각 항목의 CSS 셀렉터 확인
         for entry in entries:
             contact = entry.find_element(By.CSS_SELECTOR, '.title:nth-child(6) a').text  # 연락처
@@ -59,17 +60,24 @@ def fetch_form_data():
                     'contact': contact,
                     'people': people
                 })
+                new_data_added = True # 새로운 데이터가 추가됨
 
-        existing_data.extend(data)
+        if new_data_added:
+            existing_data.extend(data)
 
         # JSON 파일로 저장
-        with open('form_data.json', 'w', encoding='utf-8') as f:
-            json.dump(existing_data, f, ensure_ascii=False, indent=4)
+            with open('form_data.json', 'w', encoding='utf-8') as f:
+                json.dump(existing_data, f, ensure_ascii=False, indent=4)
 
-        print("데이터 추출 및 저장 완료")
+            print("데이터 추출 및 저장 완료")
+            return True  # 새로운 데이터가 추가되었음을 반환
+        else:
+            print("새로운 데이터가 없습니다.")
+            return False # 새로운 데이터가 없음을 반환
 
     except Exception as e:
         print(f"데이터 추출 중 오류 발생: {e}")
+        return False  # 오류 발생 시 False 반환
     finally:
         driver.quit()
 
@@ -77,7 +85,10 @@ def fetch_form_data():
 while True :
     # 위에서 작성한 Selenium 코드 실행
     print("데이터 추출 중...")
-    fetch_form_data()
-    update_git_repo()
-    print("데이터가 form_data.json에 저장되었습니다.")
+    if fetch_form_data():
+        update_git_repo()
+        print("데이터가 form_data.json에 저장되었습니다.")
+    else:
+        print("Git 업데이트가 필요하지 않습니다.")
+
     time.sleep(10)  # 5분 대기
