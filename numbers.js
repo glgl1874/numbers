@@ -5,6 +5,11 @@ const app = express();
 const PORT = process.env.PORT || 3000;
 const helmet = require('helmet');
 
+app.use((req, res, next) => {
+    res.setHeader('X-Content-Type-Options', 'nosniff');
+    next();
+});
+
 app.use(helmet());
 
 app.use(cors({
