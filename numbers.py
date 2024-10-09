@@ -36,7 +36,7 @@ def fetch_form_data():
         time.sleep(3)  # 로그인 후 잠시 대기
 
         # 입력폼 데이터 페이지로 이동
-        driver.get('https://rebuild-kc.com/admin/contents/form')
+        driver.get('https://rebuild-kc.com/admin/contents/form/?q=YjowOw%3D%3D&pagesize=20&status=all&code=b2024090727e831837989c&pagesize=100&status=all')
         time.sleep(3)
 
         try:
