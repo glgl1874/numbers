@@ -5,9 +5,7 @@ const app = express();
 const PORT = process.env.PORT || 3000;
 const helmet = require('helmet');
 
-
 app.use(helmet());
-
 
 app.use(cors({
     origin: 'https://rebuild-kc.com',  // 이 도메인만 허용
