@@ -5,6 +5,8 @@ from selenium import webdriver
 from selenium.webdriver.edge.service import Service
 from selenium.webdriver.common.by import By
 
+# 마지막 Git 업데이트 시간을 저장하는 변수
+last_git_update_time = 0
 
 def update_git_repo():
     # 원격 저장소의 최신 커밋 가져오기
@@ -86,8 +88,13 @@ while True :
     # 위에서 작성한 Selenium 코드 실행
     print("데이터 추출 중...")
     if fetch_form_data():
-        update_git_repo()
-        print("데이터가 form_data.json에 저장되었습니다.")
+        current_time = time.time()
+        if current_time - last_git_update_time >= 180:
+            update_git_repo()
+            last_git_update_time = current_time
+            print("Git 저장소가 업데이트되었습니다.")
+        else :
+            print("Git 업데이트 대기 중...")
     else:
         print("Git 업데이트가 필요하지 않습니다.")
 
