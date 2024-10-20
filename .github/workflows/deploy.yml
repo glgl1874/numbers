@@ -18,20 +18,21 @@ jobs:
         uses: cloudtype-github-actions/deploy@v1
         with:
           token: ${{ secrets.CLOUDTYPE_TOKEN }}
-          project: glgl1874/mapsectors1027
+          project: glgl18744/numbers
           stage: main
           yaml: |
             name: numbers
             app: node@20
             options:
-              start: node numbers.js
-              env:
-                - name: NODE_ENV
-                  value: production
-              buildenv: []
               ports: "3000"
               install: npm ci --production
-              strategy: rolling
+              build: ""
+              start: node numbers.js
+              healthz: ""
+              env:
+                - name: NODE_ENV
+                  value: ••••••••••
+              buildenv: []
             context:
               git:
                 url: git@github.com:${{ github.repository }}.git
